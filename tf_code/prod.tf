@@ -87,7 +87,7 @@ resource "aws_instance" "prod_web" {
 }
 
 resource "aws_eip_association" "prod_web" {
-    instance_id     = "aws_instance.prod_web.[count.index].id"
+    instance_id     = "aws_instance.prod_web.0.id"
     allocation_id   = "aws_eip.prod_web.id"
 }
 

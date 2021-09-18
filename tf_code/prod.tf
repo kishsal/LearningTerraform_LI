@@ -12,7 +12,14 @@ resource "aws_default_vpc" "default" {
 }
 
 resource "aws_default_subnet" "default_az1" {
-    availability_zone = "us-east-1"
+    availability_zone = "us-east-1a"
+    tags = {
+      "Terraform" = "true"
+    }
+}
+
+resource "aws_default_subnet" "default_az2" {
+    availability_zone = "us-east-1b"
     tags = {
       "Terraform" = "true"
     }
@@ -90,4 +97,10 @@ resource "aws_eip" "prod_web" {
     tags = {
         Terraform = "true"
     }
+}
+
+resource "aws_elb" "prod_web" {
+  name      = "prod_web"
+  instances = aws_instance.prod_web.*.id
+  subnets   = [ "aws_default_subnet.default_az1.id", "aws_default_subnet.default_az2.id"]
 }

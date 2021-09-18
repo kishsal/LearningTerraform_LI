@@ -23,7 +23,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "prod_tf_course" {
-  bucket = "tf-course-20191118"
+  bucket = "tf-course-20210918"
   acl    = "private"
   tags = {
     "Terraform" : "true"

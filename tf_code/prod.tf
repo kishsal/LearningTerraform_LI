@@ -22,7 +22,7 @@ provider "aws" {
   region  = "us-west-2"
 }
 
-resource "aws_s3_bucket" "prod_tf_course" {
+resource "aws_s3_bucket" "prod_tf_course1" {
   bucket = "tf-course-20210918"
   acl    = "private"
   tags = {

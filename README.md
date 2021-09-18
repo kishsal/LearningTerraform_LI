@@ -50,3 +50,24 @@ digraph {
 terraform apply -auto-approve
 ```
 - This will apply the changes by automatically approving
+
+
+## Resources
+
+
+## Variables
+Example:
+```
+variable "webserver_ami" {
+    type    = string
+    default = "ami_abc123"
+}
+
+resource "aws_instance" "web {
+    ami = var.webserver_ami
+    ...
+}
+
+terraform apply -var="webserver_ami=ami-12345"
+```
+

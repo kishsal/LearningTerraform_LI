@@ -92,8 +92,6 @@ resource "aws_eip_association" "prod_web" {
 }
 
 resource "aws_eip" "prod_web" {
-    instance = aws_instance.prod_web.id
-
     tags = {
         Terraform = "true"
     }
@@ -101,14 +99,13 @@ resource "aws_eip" "prod_web" {
 
 resource "aws_elb" "prod_web" {
   name            = "prod_web"
-  instances       = "aws_instance.prod_web.*.id"
+  instances       = aws_instance.prod_web.*.id
   subnets         = [ "aws_default_subnet.default_az1.id", "aws_default_subnet.default_az2.id"]
   security_groups = [ "aws_security_group.prod_web.id" ]
-
-  listener = {
+  listener {
     instance_port = 80
-    instance_protocal = "http"
+    instance_protocol = "http"
     lb_port = 80
-    lb_protocal = "http"
+    lb_protocol = "http"
   }
 }
